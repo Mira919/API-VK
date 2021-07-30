@@ -20,8 +20,3 @@
     }
 ]
 ```
-
-**Токен** для VK api:
-
-73eaea320bdc0d3299faa475c196cfea1c4df9da4c6d291633f9fe8f83c08c4de2a3abf89fbc3ed8a44e1
-
