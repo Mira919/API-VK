@@ -19,3 +19,12 @@ def get_groupINFO_user(): # получаем информацию о групп�
     groups_user = groups_user['items']
     return groups_user
 
+def get_friendID(): # получаем id друзей пользователя
+    params = get_params(TOKEN)
+    friends_user = requests.get(
+        'https://api.vk.com/method/friends.get',
+        params = params
+    )
+    friends_user = friends_user.json()['response']
+    friends_user = friends_user['items']
+    return friends_user
