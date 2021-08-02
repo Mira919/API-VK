@@ -28,3 +28,22 @@ def get_friendID(): # получаем id друзей пользователя
     friends_user = friends_user.json()['response']
     friends_user = friends_user['items']
     return friends_user
+
+def get_groupID_friends(): # получаем id групп друзей пользователя
+    params = get_params(TOKEN)
+    list_group_friend = []
+    for friend in get_friendID():
+        params['user_id'] = friend
+        try: # чтобы поймать ошибку когда страница пользователя закрыта
+            friend_group = requests.get(
+                'https://api.vk.com/method/groups.get',
+                params = params
+            )
+            friend_group = friend_group.json()['response']
+            friend_group = friend_group['items']
+            list_group_friend += friend_group
+            print('Идет поиск групп у пользователя c id:', params['user_id']) # показывает что программа не зависла
+            time.sleep(2) # чтобы не было ошибки: слишком много обращений к API (Too many requests per second)
+        except KeyError:
+            print(f"У пользователя c id {params['user_id']} закрыта страница")
+    return list_group_friend
