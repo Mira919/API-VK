@@ -47,3 +47,6 @@ def get_groupID_friends(): # получаем id групп друзей пол�
         except KeyError:
             print(f"У пользователя c id {params['user_id']} закрыта страница")
     return list_group_friend
+
+with open('groups.json', 'w', encoding='utf-8') as file:
+    json.dump(get_group(), file, ensure_ascii=False, indent=2)
