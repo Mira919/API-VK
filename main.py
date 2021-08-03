@@ -48,5 +48,18 @@ def get_groupID_friends(): # получаем id групп друзей пол�
             print(f"У пользователя c id {params['user_id']} закрыта страница")
     return list_group_friend
 
+def get_group(): # получаем группы, где состоит пользователь, но не состоит никто из его друзей
+    list = []
+    groups_user = get_groupINFO_user()
+    list_group_friend = get_groupID_friends()
+    for group in groups_user:
+        if group['id'] not in list_group_friend:
+            dict = {}
+            dict['name'] = group['name']
+            dict['gid'] = group['id']
+            dict['members_count'] = group['members_count']
+            list.append(dict)
+    return list
+
 with open('groups.json', 'w', encoding='utf-8') as file:
     json.dump(get_group(), file, ensure_ascii=False, indent=2)
