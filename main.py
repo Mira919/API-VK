@@ -63,3 +63,7 @@ def get_group(): # получаем группы, где состоит поль
 
 with open('groups.json', 'w', encoding='utf-8') as file:
     json.dump(get_group(), file, ensure_ascii=False, indent=2)
+
+with open('groups.json', encoding='utf-8-sig') as file:
+    data = json.load(file)
+pprint(data)
