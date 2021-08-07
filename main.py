@@ -3,7 +3,7 @@ import requests
 import pprint
 import time
 
-TOKEN = '35cbc798d0e2fc93d9e9fb388b93ea44d42e26fb1e2b6ec8cd1788cabb17c52eba8d01f4f4ee608edcffa'
+TOKEN = '3f15b7c7e70c7375b8757e56a8f67983371c2585e20bbb689478a1e09f2f668038ce012cdf3858db15f0d'
 
 def get_params(TOKEN): # обязательные параметры
     return {
@@ -54,21 +54,25 @@ def get_groupID_friends(): # получаем id групп друзей пол�
     return list_group_friend
 
 def get_group(): # получаем группы, где состоит пользователь, но не состоит никто из его друзей
-    list = []
+    list1 = []
+    dict1 = {}
     groups_user = get_groupINFO_user()
     list_group_friend = get_groupID_friends()
+    print(list_group_friend)
     for group in groups_user:
+        print(group)
         if group['id'] not in list_group_friend:
-            dict = {}
-            dict['name'] = group['name']
-            dict['gid'] = group['id']
-            dict['members_count'] = group['members_count']
-            list.append(dict)
-    return list
+            dict1['name'] = group['name']
+            dict1['gid'] = group['id']
+            dict1['members_count'] = group['members_count']
+            list1.append(dict1)
+            dict1 = {}
+    return list1
 
-with open('groups.json', 'w', encoding='utf-8') as file:
-    json.dump(get_group(), file, ensure_ascii=False, indent=2)
-
-with open('groups.json', encoding='utf-8-sig') as file:
-    data = json.load(file)
-pprint(data)
+print(get_group())
+# with open('groups.json', 'w', encoding='utf-8') as file:
+#     json.dump(get_group(), file, ensure_ascii=False, indent=2)
+#
+# with open('groups.json', encoding='utf-8-sig') as file:
+#     data = json.load(file)
+# print(data)
