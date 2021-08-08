@@ -3,7 +3,7 @@ import requests
 import pprint
 import time
 
-TOKEN = '3f15b7c7e70c7375b8757e56a8f67983371c2585e20bbb689478a1e09f2f668038ce012cdf3858db15f0d'
+TOKEN = 'beeaf7e82cda0751791175f11855355aa9eb9f945e4e3dcc0b22aac63bf94b95de7c0a954be1fafc3f68b'
 
 def get_params(TOKEN): # обязательные параметры
     return {
@@ -58,9 +58,7 @@ def get_group(): # получаем группы, где состоит поль
     dict1 = {}
     groups_user = get_groupINFO_user()
     list_group_friend = get_groupID_friends()
-    print(list_group_friend)
     for group in groups_user:
-        print(group)
         if group['id'] not in list_group_friend:
             dict1['name'] = group['name']
             dict1['gid'] = group['id']
@@ -69,10 +67,9 @@ def get_group(): # получаем группы, где состоит поль
             dict1 = {}
     return list1
 
-print(get_group())
-# with open('groups.json', 'w', encoding='utf-8') as file:
-#     json.dump(get_group(), file, ensure_ascii=False, indent=2)
-#
-# with open('groups.json', encoding='utf-8-sig') as file:
-#     data = json.load(file)
-# print(data)
+with open('groups.json', 'w', encoding='utf-8') as file:
+    json.dump(get_group(), file, ensure_ascii=False, indent=2)
+
+with open('groups.json', encoding='utf-8-sig') as file:
+    data = json.load(file)
+print(data)
